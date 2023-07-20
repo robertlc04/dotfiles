@@ -9,3 +9,8 @@
 - https://github.com/hyprwm/Hyprland/discussions/284 -> For help
 
 `git clone --recursive https://github.com/hyprwm/Hyprland.git`
+
+# Themes
+
+- Desktop Theme -> Dracula
+- Mouse Theme -> Bibata
