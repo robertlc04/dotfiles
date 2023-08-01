@@ -2,36 +2,37 @@
 
 # Prevent Multiple Monitors Errors and exect with cron
 rm -rf .cache/swww/* 
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 ## define functions ##
 Wall_Next()
 {
     WallSet=`readlink $BASEDIR/wall.$WALLMODE`
-    Wallist=(`dirname $WallSet`/*)
+    Wallist=(`dirname $WallSet | awk 'NR==1'`/*)
 
     for((i=0;i<${#Wallist[@]};i++))
     do
-        if [ $((i + 1)) -eq ${#Wallist[@]} ] ; then
-            ln -fs ${Wallist[0]} $BASEDIR/wall.$WALLMODE
-            break
-        elif [ ${Wallist[i]} == ${WallSet} ] ; then
-            ln -fs ${Wallist[i+1]} $BASEDIR/wall.$WALLMODE
-            break
-        fi
+      if [ $((i + 1)) -eq ${#Wallist[@]} ] ; then
+          ln -fs ${Wallist[0]} $BASEDIR/wall.$WALLMODE
+          break
+      elif [[ ${Wallist[i]} == ${WallSet} ]] ; then
+          ln -fs "${Wallist[i+1]}" $BASEDIR/wall.$WALLMODE
+          break
+      fi
     done
 }
 
 Wall_Set()
 {
-    swww img $BASEDIR/wall.set \
+		swww img $BASEDIR/wall.set \
     --transition-bezier .43,1.19,1,.4 \
-    --transition-type grow \
+    --transition-type center \
     --transition-duration 1 \
     --transition-fps 60 \
     --transition-pos bottom-right \
 		--outputs "$1"
-}
+
+		wal -i $BASEDIR/wall.set
+  }
 
 ## main script ##
 BASEDIR=`dirname $(realpath $0)`
@@ -84,7 +85,6 @@ while getopts "dlsnt" option ; do
 done
 
 ## check swww daemon ##
-swww query
 if [ $? -eq 1 ] ; then
     swww init
     sleep 2.5
