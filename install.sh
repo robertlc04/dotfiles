@@ -5,7 +5,7 @@ archlinux() {
   sudo pacman -S --needed --no-confirm git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
   sudo yay -Syu --no-confirm hyprland swaylock nvim hyprland wezterm wlogout swappy grim wofi slurp pamixer brightnessctl
-  sudo yay -Syu --no-confirm pywal swww ImageMagick flatpak google-chrome neovide-git zsh
+  sudo yay -Syu --no-confirm pywal swww ImageMagick flatpak google-chrome neovide-git zsh unzip
   
 }
 
@@ -18,7 +18,7 @@ fedora() {
 
   echo "Installing Hyprland and other programs"
   sudo dnf install swaylock nvim hyprland wezterm wlogout swappy grim wofi slurp pamixer brightnessctl
-  sudo dnf install python3-pip ImageMagick swww flatpak
+  sudo dnf install python3-pip ImageMagick swww flatpak unzip
 }
 
 pywal() {
@@ -31,6 +31,27 @@ sww() {
   ln -sf /home/$USER/.config/swww/wall.dark /home/$USER/.config/swww/wall.set
 }
 
+flatpak() {
+  flatpak install flathub com.heroicgameslauncher.hgl
+  flatpak install flathub com.librumreader.librum
+  flatpak install flathub com.spotify.Client
+}
+
+ohmyzsh() {
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+}
+
+fonts() {
+  mkdir /home/$USER/.local
+  mkdir /home/$USER/.local/fonts
+  mkdir /home/$USER/.local/fonts/JetBrainsMono
+  cd /home/$USER/.local/fonts/JetBrainsMono
+
+  wget -t0 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
+
+  unzip JetBrainsMono.zip
+}
+
 config() {
 
   mkdir /home/$USER/.config
@@ -38,6 +59,9 @@ config() {
   
   sww
   pywal
+  flatpak
+  ohmyzsh
+  fonts
   
 }
 
