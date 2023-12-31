@@ -17,7 +17,7 @@ fedora() {
   sudo dnf copr enable alebastr/sway-extras
 
   echo "Installing Hyprland and other programs"
-  sudo dnf install swaylock nvim hyprland wezterm wlogout swappy grim wofi slurp pamixer brightnessctl
+  sudo dnf install swaylock neovim hyprland wlogout swappy grim wofi slurp pamixer brightnessctl
   sudo dnf install python3-pip ImageMagick swww flatpak unzip
 }
 
@@ -35,6 +35,7 @@ flatpak() {
   flatpak install flathub com.heroicgameslauncher.hgl
   flatpak install flathub com.librumreader.librum
   flatpak install flathub com.spotify.Client
+  flatpak install flathub org.wezfurlong.wezterm
 }
 
 ohmyzsh() {
