@@ -15,10 +15,12 @@ fedora() {
   # Add hyprland
   sudo dnf copr enable zhanggyb/hyprland
   sudo dnf copr enable alebastr/sway-extras
+  dnf copr enable eddsalkield/swaylock-effects
+  sudo dnf copr enable wezfurlong/wezterm-nightly
 
   echo "Installing Hyprland and other programs"
-  sudo dnf install swaylock neovim hyprland wlogout swappy grim wofi slurp pamixer brightnessctl
-  sudo dnf install python3-pip ImageMagick swww flatpak unzip
+  sudo dnf install swaylock-effects neovim hyprland wlogout swappy grim rofi slurp pamixer brightnessctl
+  sudo dnf install python3-pip ImageMagick swww flatpak unzip wezterm
 }
 
 pywal() {
