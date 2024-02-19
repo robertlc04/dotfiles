@@ -13,9 +13,9 @@ fedora() {
   echo "Sudo is needed"
   sudo dnf install dnf-plugins-core
   # Add hyprland
-  sudo dnf copr enable zhanggyb/hyprland
+  sudo dnf copr enable solopasha/hyprland
   sudo dnf copr enable alebastr/sway-extras
-  sudo dnf copr enable ricclopez/swaylock-effects
+  # sudo dnf copr enable ricclopez/swaylock-effects
   sudo dnf copr enable wezfurlong/wezterm-nightly
 
   echo "Installing Hyprland and other programs"
