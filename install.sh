@@ -15,7 +15,7 @@ fedora() {
   # Add hyprland
   sudo dnf copr enable zhanggyb/hyprland
   sudo dnf copr enable alebastr/sway-extras
-  sudo dnf copr enable eddsalkield/swaylock-effects
+  sudo dnf copr enable ricclopez/swaylock-effects
   sudo dnf copr enable wezfurlong/wezterm-nightly
 
   echo "Installing Hyprland and other programs"
