@@ -1,11 +1,13 @@
 #!/bin/bash
 
+system=""
+
 archlinux() {
   echo "Installing yay"
   sudo pacman -S --needed --no-confirm git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
-  sudo yay -Syu --no-confirm hyprland swaylock nvim hyprland wezterm wlogout swappy grim wofi slurp pamixer brightnessctl
-  sudo yay -Syu --no-confirm pywal swww ImageMagick flatpak google-chrome neovide-git zsh unzip
+  sudo yay -Syu --no-confirm hyprland wezterm swaylock nvim hyprland wlogout swappy grim wofi slurp pamixer brightnessctl
+  sudo yay -Syu --no-confirm pywal swww ImageMagick flatpak google-chrome zsh unzip
   
 }
 
@@ -34,10 +36,8 @@ sww() {
 }
 
 flatpak() {
-  flatpak install flathub com.heroicgameslauncher.hgl
   flatpak install flathub com.librumreader.librum
   flatpak install flathub com.spotify.Client
-  flatpak install flathub org.wezfurlong.wezterm
 }
 
 ohmyzsh() {
@@ -60,8 +60,11 @@ config() {
   mkdir /home/$USER/.config
   cp -r ./config/* /home/$USER/.config
   
+  if [[ $system != "arch" ]];then 
+    pywal
+  fi
+
   sww
-  pywal
   flatpak
   ohmyzsh
   fonts
@@ -75,11 +78,11 @@ if [[ $CONFIRM == 'y' ]]; then
 
   if [[ $(grep "^NAME=\"Arch" /etc/os-release) ]]; then
     echo "System: Arch linux"
+    system="arch"
     archlinux
-  fi
-
-  if [[ $(grep "^NAME=\"Fedora" /etc/os-release) ]]; then
+  elif [[ $(grep "^NAME=\"Fedora" /etc/os-release) ]]; then
     echo "System: Fedora"
+    system="fedora"
     fedora
   fi
 

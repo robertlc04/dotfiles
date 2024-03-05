@@ -10,7 +10,7 @@
     "height": 50,
     "modules-left": ["clock","custom/weather","hyprland/workspaces"],
     "modules-center": ["custom/player"],
-    "modules-right": ["memory","cpu","network", "bluetooth", "temperature","battery","backlight","pulseaudio","pulseaudio#microphone","custom/wallchange","tray"],
+    "modules-right": ["memory","cpu","network", "bluetooth", "temperature","battery","backlight","pulseaudio","pulseaudio#microphone","custom/wallchange"/*,"tray"*/],
 
     // "hyprland/window": {
     //     "format": "{}"
@@ -27,7 +27,7 @@
             "3": "",
             "4": "󰓇"
         },
-        "sort-by-number": true
+        "sort-by-id": true
     },
 
    "custom/weather" : {
@@ -53,7 +53,7 @@
         "format": "{icon}{}",
         "format-icons": "<span font='16'></span>",
         "exec": "~/.config/swww/swwwallpaper.sh -t",
-        "on-click": "~/.config/swww/swwwallpaper.sh -n",
+        "on-click": "~/.config/swww/swwwallpaper.sh -n && wal -i `realpath /home/robert/.config/swww/wall.set` -q",
         "interval" : 60, // once every day
         "tooltip": true
     },
