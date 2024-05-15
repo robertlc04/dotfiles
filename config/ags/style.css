@@ -1,0 +1,109 @@
+@import url("/home/robert/.cache/wal/colors-gtk.css");
+
+/* Generals */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  text-decoration: none;
+  box-shadow: none;
+  background: none;
+  font-family: "JetbrainsMono Nerd Font";
+}
+
+/* Main values */
+window.bar {
+  background-color: transparent;
+  color: @color3;
+  font-size: 15px;
+}
+
+.button {
+  min-width: 0;
+  padding: 0 7px;
+  margin: 0 4px;
+  border-radius: 0;
+  border: 0px;
+  color: alpha(@color8, 0.5);
+}
+
+.button:active {
+  background: alpha(@color8, 1);
+  color: alpha(@color1, 1);
+}
+
+.button:hover {
+  background: alpha(@color8, 1);
+  color: alpha(@color7, 0.5);
+}
+
+.focused {
+  min-width: 0;
+  padding: 0 7px;
+  margin: 0 4px;
+  border-radius: 0;
+  border: 0px;
+  color: alpha(@color7, 0.7);
+}
+
+.focused:active {
+  background: alpha(@color8, 1);
+  color: alpha(@color1, 1);
+}
+
+.focused:hover {
+  background: alpha(@color8, 1);
+  color: alpha(@color7, 0.5);
+}
+
+/* Class */
+.workspaces {
+  border: 0;
+  padding: 1px;
+  margin: 1px 0;
+  border-left: 1px alpha(@color0, 0.8) solid;
+}
+
+.left {
+  padding: 0;
+  min-height: 0;
+  min-width: 0;
+}
+
+.blocks {
+  background: alpha(@background, 0.8);
+  border: 1px alpha(@color0, 0.8) solid;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.clock {
+  padding: 5px 2px 5px 5px;
+}
+
+.charging {
+  color: #9A9A10
+}
+.battery_low {
+  color: #AA0000;
+}
+
+.systray, .systray_button, .systray_icon {
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  border-image: none;
+  color: @foreground;
+}
+.systray_button:active, .systray_button:hover {
+  border-image: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.wallchange {
+  color: alpha(@foreground,0.3);
+  font-size: 17px;
+  border-left: 1px solid alpha(@color0, 0.7);
+  margin-left: 5px;
+}
