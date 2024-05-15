@@ -1,0 +1,16 @@
+binds=(ctrl+1 ctrl+2 ctrl+3 ctrl+5) 
+
+procTabletBtn() {
+    while IFS= read -r line; do
+      echo "keydown ${binds[$line]}" | dotool  
+      # echo "keypress ${binds[$line]}";
+        # for i in {0..4}; do
+        #     if [[ $line = $i ]]; then
+        #     fi
+        # done
+    done
+}
+ 
+dev=$(libinput list-devices | grep -A1 'Pad' | grep 'event' | awk '{print $2}')
+stdbuf -o0 libinput debug-events --device $dev | stdbuf -oL awk '/pressed/ {print $4}' | procTabletBtn
+ 
