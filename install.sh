@@ -38,6 +38,7 @@ sww() {
 flatpak() {
   flatpak install flathub com.librumreader.librum
   flatpak install flathub com.spotify.Client
+  flatpak install flathub com.github.flxzt.rnote
 }
 
 ohmyzsh() {
