@@ -1,5 +1,5 @@
-![Warning]
-This dotfiles are for personal usage. Feel free to modify if for your needs.
+> [!WARNING]
+> This dotfiles are for personal usage. Feel free to modify it for your needs.
 
 
 # Dotfiles
@@ -9,5 +9,7 @@ This dotfiles are for personal usage. Feel free to modify if for your needs.
 ---
 
 Terminal -> Alacritty
+<br>
 Bar -> Ags
+<br>
 WM -> Hyprland
