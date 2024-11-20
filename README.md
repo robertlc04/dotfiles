@@ -1,10 +1,13 @@
+![Warning]
+This dotfiles are for personal usage. Feel free to modify if for your needs.
+
+
 # Dotfiles
-# Don't downloaded INCOMPLETE
-```
-sudo ./install.sh
-```
 
-# Themes
+![MainImage](.images/actual_status.png)
 
-- Desktop Theme -> Dracula
-- Mouse Theme -> Bibata
+---
+
+Terminal -> Alacritty
+Bar -> Ags
+WM -> Hyprland

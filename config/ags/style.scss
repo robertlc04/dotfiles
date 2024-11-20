@@ -1,0 +1,109 @@
+// hello
+@use "sass:color";
+@use "sass:meta";
+
+$bg: #212223;
+$fg: #f1f1f1;
+$accent: #378df7;
+$radius: 7px;
+
+$foreground_normal: #e9e2c9;
+$foreground_alt: #e9e1c3;
+$foreground_focus: #dac9aa;
+$background_normal: #585148;
+$background_alt: #583a24;
+$accent_ink: #585148;
+$accent_brown: #583a24;
+$accent_scarlet: #7a1405;
+$accent_aquamarine: #158f9c;
+
+window.Bar {
+    border: 1px solid $accent_scarlet;
+    border-radius: $radius;
+    box-shadow: none;
+    background-color: $background_normal;
+    color: $foreground_normal;
+    font-size: 1.1em;
+    font-weight: bold;
+
+    button {
+        all: unset;
+        background-color: transparent;
+
+        &:hover label {
+            background-color: color.adjust($foreground_alt, $alpha: -0.4);
+            border-color: color.adjust($foreground_focus, $alpha: -0.4);
+        }
+
+        &:active label {
+            background-color: color.adjust($foreground_alt, $alpha: -0.4);
+        }
+    }
+
+    label {
+        transition: 200ms;
+        padding: 0 8px;
+        margin: 2px;
+        border-radius: $radius;
+        border: 1pt solid transparent;
+    }
+
+    .Workspaces .focused label {
+        color: $accent_aquamarine;
+    }
+
+    .FocusedClient {
+        color: $accent;
+    }
+
+    .Media .Cover {
+        min-height: 1.2em;
+        min-width: 1.2em;
+        border-radius: $radius;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .Battery label {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .Systray {
+        margin-right: 5px;
+    }
+
+    .Ram {
+        * {
+            all: unset;
+        }
+
+        & {
+            margin: 0 0.6em;
+        }
+    }
+
+    .Cpu {
+        * {
+            all: unset;
+        }
+
+        & {
+            margin: 0 0.6em 0 0em;
+        }
+    }
+
+    .AudioSlider {
+        * {
+            all: unset;
+        }
+
+        icon {
+            margin-right: 0.6em;
+        }
+
+        & {
+            margin: 0 0.6em;
+        }
+    }
+}

@@ -1,109 +1,93 @@
-@import url("/home/robert/.cache/wal/colors-gtk.css");
+@import url("/home/rlc/.cache/wal/colors-gtk.css");
 
-/* Generals */
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  text-decoration: none;
-  box-shadow: none;
-  background: none;
-  font-family: "JetbrainsMono Nerd Font";
+window.Bar {
+    border: 1px solid @color1;
+    border-radius: 7px;
+    box-shadow: none;
+    background-color: mix(@color0, @color2, 0.5);
+    color: @foreground;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
-/* Main values */
-window.bar {
-  background-color: transparent;
-  color: @color3;
-  font-size: 15px;
+button {
+    all: unset;
+    background-color: transparent;
+    font-size: 1.3rem;
 }
 
-.button {
-  min-width: 0;
-  padding: 0 7px;
-  margin: 0 4px;
-  border-radius: 0;
-  border: 0px;
-  color: alpha(@color8, 0.5);
+button:hover label {
+    background-color: alpha(@foreground, 0.4);
 }
 
-.button:active {
-  background: alpha(@color8, 1);
-  color: alpha(@color1, 1);
+button:active label {
+    background-color: alpha(@foreground, 0.4);
 }
 
-.button:hover {
-  background: alpha(@color8, 1);
-  color: alpha(@color7, 0.5);
+label {
+    transition: color ease-out 250ms;
+    padding: 0 8px;
+    margin: 2px;
+    border-radius: 7px;
+    border: 1pt solid transparent;
+    font-family: "Edu AU VIC WA NT Pre";
+    font-style: normal;
+    font-size: 0.9em;
 }
 
-.focused {
-  min-width: 0;
-  padding: 0 7px;
-  margin: 0 4px;
-  border-radius: 0;
-  border: 0px;
-  color: alpha(@color7, 0.7);
+.Workspaces .focused label {
+    color: @color4;
 }
 
-.focused:active {
-  background: alpha(@color8, 1);
-  color: alpha(@color1, 1);
+.FocusedClient {
+    color: @color4;
 }
 
-.focused:hover {
-  background: alpha(@color8, 1);
-  color: alpha(@color7, 0.5);
+.Media .Cover {
+    min-height: 1.2em;
+    min-width: 1.2em;
+    border-radius: 7px;
+    background-position: center;
+    background-size: contain;
 }
 
-/* Class */
-.workspaces {
-  border: 0;
-  padding: 1px;
-  margin: 1px 0;
-  border-left: 1px alpha(@color0, 0.8) solid;
+.Battery label {
+    padding-left: 0;
+    margin-left: 0;
 }
 
-.left {
-  padding: 0;
-  min-height: 0;
-  min-width: 0;
+.Systray {
+    margin-right: 10px;
 }
 
-.blocks {
-  background: alpha(@background, 0.8);
-  border: 1px alpha(@color0, 0.8) solid;
-  border-radius: 4px;
-  padding: 1px 5px;
+.Ram,
+.Ram label,
+.Cpu,
+.Cpu label {
+    all: unset;
+    padding: 0;
+    border: 0;
+    margin-right: 0.2em;
+    font-size: 1.1rem;
 }
 
-.clock {
-  padding: 5px 2px 5px 5px;
+.AudioSlider {
+    all: unset;
+    margin-left: 0.7em;
 }
 
-.charging {
-  color: #9A9A10
-}
-.battery_low {
-  color: #AA0000;
-}
-
-.systray, .systray_button, .systray_icon {
-  text-shadow: none;
-  -gtk-icon-shadow: none;
-  border-image: none;
-  color: @foreground;
-}
-.systray_button:active, .systray_button:hover {
-  border-image: none;
-  border: 0;
-  box-shadow: none;
+.ChangeWallpaper,
+.ChangeWallpaper button label {
+    all: unset;
+    margin-right: 0.4em;
+    font-size: 1.3rem;
+    transition: color ease-out 250ms;
 }
 
-.wallchange {
-  color: alpha(@foreground,0.3);
-  font-size: 17px;
-  border-left: 1px solid alpha(@color0, 0.7);
-  margin-left: 5px;
+.ChangeWallpaper button:hover label {
+    color: alpha(@color3, 0.7);
+}
+
+.ChangeWallpaper button:active label {
+    color: alpha(@color3, 0.7);
 }

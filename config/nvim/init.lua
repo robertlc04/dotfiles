@@ -1,21 +1,45 @@
-require "core"
+-- Completion
+local mini_completion = require('mini.completion')
 
-local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
+mini_completion.setup{}
 
-if custom_init_path then
-  dofile(custom_init_path)
-end
+-- Icons
+local mini_icons = require('mini.icons')
+mini_icons.setup()
 
-require("core.utils").load_mappings()
+-- Pairs
+local mini_pairs = require('mini.pairs')
+mini_pairs.setup()
 
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+-- Colors hipatterns
+local mini_hipatterns = require('mini.hipatterns')
+mini_hipatterns.setup()
 
--- bootstrap lazy.nvim!
-if not vim.loop.fs_stat(lazypath) then
-  require("core.bootstrap").gen_chadrc_template()
-  require("core.bootstrap").lazy(lazypath)
-end
+-- Indent Scope
 
-dofile(vim.g.base46_cache .. "defaults")
-vim.opt.rtp:prepend(lazypath)
-require "plugins"
+local mini_indentscope = require('mini.indentscope')
+mini_indentscope.setup()
+
+-- Surround
+
+local mini_surround = require('mini.surround')
+mini_surround.setup({})
+
+-- LSP configuration
+local lspconfig = require('lspconfig')
+
+lspconfig.rust_analyzer.setup{
+	cargo = {
+			features = "all",
+	},
+}
+
+-- Mapping
+
+vim.keymap.set('n', '<C-n>', ':bNext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-p>', ':blast<CR>', { noremap = true, silent = true })
+
+-- General Configuration
+vim.o.relativenumber = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
