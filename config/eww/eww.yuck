@@ -1,0 +1,164 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+    (workspaces)
+    (music)
+    (sidestuff)))
+
+;... Left
+
+(defpoll active_workspace :interval "100ms" :initial 1 `hyprctl activeworkspace -j | jq .id`)
+(defvar workspaces_icons_array "{ \"1\": \"\", \"2\": \"\", \"3\": \"\", \"4\": \"󰓇\", \"5\": \"\", \"6\": \"\", \"7\": \"󰏫\", \"8\": \"\" }")
+(defvar workspaces_ids_array "[ 1, 2, 3, 4, 5, 6, 7, 8 ]")
+
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "h" :space-evenly true
+       :halign "start"
+       :spacing 10
+	(for entry in workspaces_ids_array
+		(button 
+			:onclick "hyprctl dispatch workspace ${entry}"
+			:class { active_workspace == entry ? "activeworkspace" : "workspace" }
+		{ replace( "${jq(workspaces_icons_array,'."${entry}"')}", '"','') } )
+	)))
+
+;... Center
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "center"
+    {music != "" ? "${music}" : ""}))
+
+(deflisten music :initial ""
+  "playerctl -p spotify,spotube.instance2 --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+;... Right
+(defwidget sidestuff []
+  (box :class "sidestuff" :spacing 10 :orientation "h" :space-evenly false :halign "end"
+  	(wifi) 
+    (metric :label " "
+            :value { substring(volume,1,strlength(volume) - 3) })
+	(metric :label " "
+            :value {EWW_CPU.avg})
+    (metric :label " "
+            :value {EWW_RAM.used_mem_perc})
+	(battery)
+	time 
+	(systray_main)
+	(change_themes)
+	
+))
+
+
+(defpoll volume
+	:initial 0.0
+	:interval "100ms"
+	`amixer sget Master | awk '/Left:/ {print $5}'`
+)
+
+(defpoll 
+	wifi_state
+	:interval "100ms" 
+	:initial "disconnected" 
+	`iwctl station wlan0 show | awk '/State/ {print $2}'`
+)
+
+(defpoll 
+	wifi_name
+	:interval "100ms" 
+	:initial "disconnected" 
+	`iwctl station wlan0 show | awk 'NR==7 {print $3}'`
+)
+
+(defwidget wifi []
+	(box 
+		:class "wifi"
+		:tooltip "${wifi_name}"
+		:hexpand true
+		(image
+			:class "wifi_icon"
+			:tooltip wifi_name
+			:icon { 
+			matches ( wifi_state,"/disconnected/" ) 
+				? "network-wireless-offline" 
+				: "network-wireless-signal-excellent"
+			}
+		)
+	)
+)
+
+
+(defwidget metric [label value]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+	(box :class "circular_progress"
+		(circular-progress
+				:value value
+				:start-at 50.0
+				:thickness 10.0
+				:clockwise true
+			)
+)))
+
+(defwidget battery [] 
+	(box 
+		(image 
+			:icon { 
+				EWW_BATTERY.BAT1.status == "Charging" 
+				?  "battery-level-${round(EWW_BATTERY.BAT1.capacity / 10,0)}0-charging"
+				:  "battery-level-${round(EWW_BATTERY.BAT1.capacity / 10,0)}0"  
+			}
+		)
+	)
+)
+
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
+
+
+(defwidget systray_main []
+	(systray 
+		:spacing 10
+		:orientation "h"
+		:icon-size 18
+		:space-evenly true
+		:prepend-new true
+	) 
+)
+
+(defwidget change_themes [] 
+	(box 
+		:spacing 5
+		:space-evenly true
+		:orientation "h"
+		:class "change_themes"
+		(button 
+			:timeout "5000ms"
+			:class "change_wallpaper"
+			:onclick "/home/rlc/.config/swww/swwwallpaper.sh -n"
+			;...(image :icon "night-light")
+			(image :icon "applications-science")
+		)
+		(button
+			:timeout "5000ms"
+			:class "change_theme"
+			:onclick "/home/rlc/.config/swww/swwwallpaper.sh -s"
+			(image :icon "night-light")
+		)
+	)
+)
+
+;... Windows
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "1%"
+                      :width "98%"
+                      :anchor "top center")
+  :stacking "bg"
+  :exclusive true
+  (bar))

@@ -1,0 +1,7 @@
+[
+  { 
+	"directory": "ADD_DIRECTORY",
+    "arguments": ["/usr/bin/cc", "-Wall", "-o", "main", "main.c"],
+    "file": "file.cc" 
+  }
+]

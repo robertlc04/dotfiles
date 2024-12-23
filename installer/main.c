@@ -13,6 +13,7 @@
 #define clone_git(url) "git", "clone", url
 #define Ohoh(S) nob_log(NOB_ERROR, "Ohoh %s",S);
 #define sylink(S,D) "ln", "-sf", S, D
+#define PACKAGES "aylurs-gtk-shell-git" , "hyprland" , "alacritty" , "neovim" , "swappy" , "grim" , "wofi" , "slurp" , "pamixer" , "alsa-tools" , "brightnessctl" , "python-pywal16" , "swww" , "flatpak" , "unzip" , "p7zip" , "zen-browser-avx2-bin"
 
 bool install_yay_deps() {
     Cmd cmd = {0};
@@ -80,7 +81,7 @@ Nob_String_View configs_path(const char *home) {
     Nob_String_Builder config_dir = {0};
 
     nob_sb_append_cstr(&config_dir, home);
-    nob_sb_append_cstr(&config_dir, "/.config_test");
+    nob_sb_append_cstr(&config_dir, "/.config");
     nob_sb_append_null(&config_dir);
 
     return nob_sb_to_sv(config_dir);
@@ -90,7 +91,7 @@ Nob_String_View configs_path(const char *home) {
 Nob_String_View fonts_path(const char *home) {
     Nob_String_Builder fonts_dir = {0};
     nob_sb_append_cstr(&fonts_dir, home);
-    nob_sb_append_cstr(&fonts_dir, "/.local/share/fonts_test");
+    nob_sb_append_cstr(&fonts_dir, "/.local/share/fonts");
     nob_sb_append_null(&fonts_dir);
 
     return nob_sb_to_sv(fonts_dir);
@@ -272,8 +273,7 @@ int main(/* int argc, char **argv */) {
     nob_log(NOB_INFO, "Install daily use packages");
 
     /* Install daily use packages */
-    const char* packages = "aylurs-gtk-shell-git hyprland alacritty nvim swappy grim wofi slurp pamixer alsa-tools brightnessctl python-pywal16 swww ImageMagick flatpak unzip p7zip zen-browser-avx2-bin" ;
-    cmd_append(&cmd, install_package_yay, packages);
+    cmd_append(&cmd, install_package_yay, PACKAGES);
     if (!nob_cmd_run_sync_and_reset(&cmd)) return 1;
 
     /* Flatpak install */

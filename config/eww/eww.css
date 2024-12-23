@@ -1,0 +1,54 @@
+@import url("/home/rlc/.cache/wal/colors-gtk.css");
+
+.bar {
+  background-color: mix(@color1,@color0,0.5);
+  color: @color12;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+.sidestuff {
+	all: unset;
+	color: @color7;
+}
+
+
+.wifi_icon:hover, .wifi:hover {
+	color: @color6;
+}
+.change_themes {
+	all: unset;
+	background-color: mix(@color1,@color0,0.5);
+}
+
+.change_wallpaper, .change_theme {
+	all: unset;
+	color: @color6;
+	background-color: mix(@color1,@color0,0.5);
+}
+
+.circular_progress {
+	all: unset;
+	padding: 0 4px;
+	color: mix(@color12,@color5,0.5)
+}
+
+.workspace, .activeworkspace {
+	all: unset;
+	background-color: mix(@color1,@color0,0.5);
+	color: @color12;
+}
+
+.workspace :active {
+	color: @color7;
+}
+
+.workspace :hover {
+  color: @color7;
+}
+
+.activeworkspace {
+	color: @color7;
+}
+
