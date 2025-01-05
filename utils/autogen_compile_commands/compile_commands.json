@@ -1,0 +1,1 @@
+[ { "directory": "\/home\/rlc\/programming\/c\/autogen_compile_commands", "arguments": [ "\/usr\/bin\/cc", "-Wall", "-o", "main", "main.c" ], "file": "main.c" } ]
